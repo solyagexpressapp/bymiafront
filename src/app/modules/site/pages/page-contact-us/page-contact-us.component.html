@@ -1,0 +1,113 @@
+<app-block-map></app-block-map>
+
+<app-page-header [header]="'Contacta con nosotros'" [breadcrumbs]="[
+    {label: 'Inicio',       url: '../../'},
+    {label: 'Contacta con nosotros', url: ''}
+]"></app-page-header>
+
+<div class="block">
+    <div class="container">
+        <div class="card mb-0">
+            <div class="card-body contact-us">
+                <div class="contact-us__container">
+                    <div class="row">
+                        <div class="col-12 col-lg-6 pb-4 pb-lg-0">
+                            <h4 class="contact-us__header card-title">Nuestra dirección</h4>
+
+                            <div class="contact-us__address" *ngIf="contactUs">
+                                <p>
+                                    {{contactUs.direccion}}<br>
+                                    Correo: {{contactUs.email}}<br>
+                                    Número de teléfono: {{contactUs.telefono_principal}}
+                                </p>
+                                <p>
+
+                                    <strong>Descripción</strong><br>
+                                    {{contactUs.descripcion}}
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-lg-6">
+                            <h4 class="contact-us__header card-title">Déjanos un mensaje</h4>
+
+                            <form [formGroup]="form">
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="form-name">Su nombre</label>
+                                        <input type="text" id="form-name" class="form-control"
+                                               [class.error-input]="(!fc.name.valid && (fc.name.dirty || fc.name.touched))"
+                                               autocomplete="off" formControlName="name" minlength="2"
+                                               maxlength="50" placeholder="Escriba su nombre completo" required>
+
+                                        <!-- Error messages -->
+                                        <span
+                                            *ngIf="fc.name.errors?.required && (fc.name.dirty || fc.name.touched)"
+                                            class="error">Nombre obligatorio
+                                        </span>
+                                        <span
+                                            *ngIf="fc.name.errors?.minlength && (fc.name.dirty || fc.name.touched)"
+                                            class="error">Longitud mínima 2 caracteres
+                                        </span>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="form-email">Correo</label>
+                                        <input type="email" id="form-email" class="form-control"
+                                               [class.error-input]="(!fc.email.valid && (fc.email.dirty || fc.email.touched))"
+                                               autocomplete="off" formControlName="email"
+                                               maxlength="50" placeholder="Escriba su correo" required>
+
+                                        <!-- Error messages -->
+                                        <span
+                                            *ngIf="fc.email.errors?.required && (fc.email.dirty || fc.email.touched)"
+                                            class="error">Correo obligatorio
+                                        </span>
+                                        <span
+                                            *ngIf="fc.email.errors?.email && (fc.email.dirty || fc.email.touched)"
+                                            class="error">Formato de correo inválido
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="form-subject">Asunto</label>
+                                    <input type="text" id="form-subject" class="form-control"
+                                           [class.error-input]="(!fc.subject.valid && (fc.subject.dirty || fc.subject.touched))"
+                                           autocomplete="off" formControlName="subject" minlength="2"
+                                           maxlength="50" placeholder="Escriba el asunto" required>
+
+                                    <!-- Error messages -->
+                                    <span
+                                        *ngIf="fc.subject.errors?.required && (fc.subject.dirty || fc.subject.touched)"
+                                        class="error">Asunto obligatorio
+                                    </span>
+                                    <span
+                                        *ngIf="fc.subject.errors?.minlength && (fc.subject.dirty || fc.subject.touched)"
+                                        class="error">Longitud mínima 2 caracteres
+                                    </span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="form-message">Mensaje</label>
+                                    <textarea id="form-message" class="form-control" rows="4" formControlName="message"
+                                              placeholder="Escriba el mensaje" required maxlength="255" minlength="2"
+                                              [class.error-input]="(!fc.message.valid && (fc.message.dirty || fc.message.touched))"></textarea>
+
+                                    <!-- Error messages -->
+                                    <span
+                                        *ngIf="fc.message.errors?.required && (fc.message.dirty || fc.message.touched)"
+                                        class="error">Mensaje obligatorio
+                                    </span>
+                                    <span
+                                        *ngIf="fc.message.errors?.minlength && (fc.message.dirty || fc.message.touched)"
+                                        class="error">Longitud mínima 2 caracteres
+                                    </span>
+                                </div>
+                                <button type="submit" class="btn btn-primary" (click)="onSubmit()">Enviar mensaje</button>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
